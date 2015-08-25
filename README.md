@@ -37,7 +37,7 @@ RestartSec=15
 
 ExecStartPre=-/usr/bin/docker kill $NAME
 ExecStartPre=-/usr/bin/docker rm $NAME
-ExecStartPre=-/bin/sh -c 'if ! docker images | tr -s " " : | grep "^${IMAGE}:"; then docker pull "${IMAGE}"; fi'
+ExecStartPre=-/usr/bin/docker pull "${IMAGE}"
 ExecStart=/usr/bin/docker run --name $NAME --net=host \
 	-e DUCKDNS_DOMAIN=myhostname \
 	-e DUCKDNS_TOKEN=1234abcd-abcd-1234-abcd-123456789abc \
