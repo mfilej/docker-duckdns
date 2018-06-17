@@ -12,16 +12,7 @@ if [ -z "$DUCKDNS_TOKEN" ]; then
 fi
 
 while true; do
-	MACHINE_IP=$(ip route get 8.8.8.8 | awk '/8.8.8.8/ {print $NF}')
-	IP=${DUCKDNS_IP:-$MACHINE_IP}
-	if [ -z "$IP" ]; then
-		echo "Failed to find public IP. Is networking up yet?"
-		exit 1
-	fi
-
-	echo "Using IP: $IP"
-
-	URL="https://www.duckdns.org/update?domains=${DUCKDNS_DOMAIN}&token=${DUCKDNS_TOKEN}&ip=${IP}"
+	URL="https://www.duckdns.org/update?domains=${DUCKDNS_DOMAIN}&token=${DUCKDNS_TOKEN}"
 	echo "Calling URL: $URL"
 	curl -s -k "$URL" & wait
 
