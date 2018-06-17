@@ -14,7 +14,8 @@ fi
 while true; do
 	URL="https://www.duckdns.org/update?domains=${DUCKDNS_DOMAIN}&token=${DUCKDNS_TOKEN}"
 	echo "Calling URL: $URL"
-	curl -s -k "$URL" & wait
+	RESPONSE=$(curl -s -k "$URL" & wait)
+	echo "Duck DNS response: ${RESPONSE}"
 
 	# Sleep and loop
 	sleep $DUCKDNS_UPDATE_INTERVAL & wait
